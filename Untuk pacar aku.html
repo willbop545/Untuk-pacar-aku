@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>𝘜𝘯𝘵𝘶𝘬 𝘚𝘢𝘺𝘢𝘯𝘨 𝘈𝘬𝘶 🌹</title>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&family=Great+Vibes&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Quicksand', sans-serif;
+      background: linear-gradient(to bottom, #ffdde1, #ffc4d6, #ffb6c1);
+      background-attachment: fixed;
+      overflow-x: hidden;
+      text-align: center;
+      color: #6a1b9a;
+    }
+
+    h1 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 3em;
+      color: red;
+      margin-top: 40px;
+      text-shadow: 2px 2px 8px whitesmoke;
+    }
+
+    #photo {
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px double #f48fb1;
+      box-shadow: 0 0 25px #ffb6c1;
+      margin-top: 20px;
+    }
+
+    #typingText {
+      max-width: 90%;
+      margin: 30px auto;
+      font-size: 1.1em;
+      line-height: 1.7;
+      background: ghostwhite;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(255, 182, 193, 0.4);
+      color: blue;
+    }
+
+    .buttons {
+      display: none;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .buttons button {
+      background: linear-gradient(45deg, #ff4081, #f06292);
+      color: white;
+      padding: 12px 25px;
+      font-size: 1em;
+      border: none;
+      border-radius: 25px;
+      box-shadow: 0 0 15px #f06292;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .buttons button::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease-in-out;
+      z-index: 0;
+    }
+
+    .buttons button:hover::before {
+      transform: scaleX(1);
+    }
+
+    .buttons button span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .flower {
+      position: fixed;
+      top: -50px;
+      width: 30px;
+      height: 30px;
+      background-image: url('https://pngimg.com/uploads/cherry_blossom/cherry_blossom_PNG19.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      animation: fall linear infinite;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-100px) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(110vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .music-info {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255, 255, 255, 0.6);
+      padding: 10px 25px;
+      border-radius: 25px;
+      font-size: 0.9em;
+      color: #880e4f;
+      backdrop-filter: blur(5px);
+      box-shadow: 0 0 15px rgba(255,105,180,0.3);
+    }
+
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>ini untuk pacar aku💞😚💫</h1>
+
+  <div id="typingText"></div>
+
+  <div class="buttons" id="wordButtons">
+    <button onclick="showMessage('kangen')"><span>aku kangen 🙁</span></button>
+    <button onclick="showMessage('cinta')"><span>aku cinta kamu🤩</span></button>
+    <button onclick="showMessage('sayang')"><span>aku sayang kamu🌹</span></button>
+    <button onclick="showMessage('peluk')"><span>aku pingin peluk🙁</span></button>
+    <button onclick="showMessage('manja')"><span>aku lagi manja🙁</span></button>
+  </div>
+
+
+  <script>
+    const firstMessage = `Aku cuma mau bilang sesuatu Sebenernya Aku Sayang Banget Sama kamu\n\nTerima kasih ya udah hadir dalam hidupku. Kamu itu istimewa, lebih dari yang bisa aku ucapkan. Kamu itu rumah, nyaman dan hangat.\n\nKlik salah satu tombol di bawah yah sayang~`;
+
+    const messages = {
+      kangen: `Kamu kangen Sama Ibob? Ibob Bisa Kok Jumpaan Sama Kamu 💋."`,
+      cinta: `Cintaku ke kamu tuh tumbuh tiap hari. Bahkan saat aku lagi capek, cuma mikirin kamu aja udah bikin aku tenang. Aku cinta kamu, sepenuh hati love you sayang aku 🌹🤩.`,
+      sayang: `Ibob sayang kamu, Bahkan Ibob gak bisa nyarik yng baru atau lupain kamu.`,
+      peluk: `Bayangin aku lagi meluk kamu sekarang. Peluk hangat yang bilang, "Semua akan baik-baik saja."`,
+      manja: `Sayang Lagi Manja? Ibob bisa kok manjain Sayang Klok Mau Di Manjaiin Langsung Ke Whatsapp Aja Yah Sayang`
+    };
+
+    const typingElement = document.getElementById("typingText");
+    const wordButtons = document.getElementById("wordButtons");
+
+    function typeText(text, callback) {
+      let i = 0;
+      typingElement.innerHTML = '';
+      const interval = setInterval(() => {
+        typingElement.innerHTML += text[i];
+        i++;
+        if (i >= text.length) {
+          clearInterval(interval);
+          if (callback) callback();
+        }
+      }, 40);
+    }
+
+    function showMessage(key) {
+      wordButtons.style.opacity = "0.5";
+      typeText(messages[key], () => {
+        wordButtons.style.opacity = "1";
+      });
+    }
+
+    function createFlowers() {
+      setInterval(() => {
+        const flower = document.createElement('div');
+        flower.classList.add('flower');
+        flower.style.left = `${Math.random() * window.innerWidth}px`;
+        flower.style.animationDuration = `${5 + Math.random() * 5}s`;
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 10000);
+      }, 350);
+    }
+
+    window.onload = () => {
+      typeText(firstMessage, () => {
+        wordButtons.style.display = "flex";
+        createFlowers();
+      });
+
+      document.body.addEventListener('click', () => {
+        const audio = document.getElementById('bgm');
+        audio.play().catch(() => {});
+      }, { once: true });
+    };
+     // efek bunga
+  setInterval(() => {
+    const flower = document.createElement("div");
+    flower.classList.add("flower");
+    flower.innerText = "💗";
+    flower.style.left = Math.random() * 100 + "vw";
+    flower.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    document.body.appendChild(flower);
+    setTimeout(() => flower.remove(), 5000);
+  }, 500);
+  </script>
+
+</body>
+</html>
